@@ -1,11 +1,13 @@
 # Azure Kubernetes Service Cluster deployment with Terraform
 
 
+=== Still work in progress ===
+
 = Tested with success with Terraform v0.12.20 + Azurerm provider version v1.44.0 + Kubernetes provider v1.11.0 + Helm Provider 1.0.0
 
 --------------------------------------------------------------------------------------------------------
 
-This is a set of Terraform files used to deploy an Azure Kubernetes Cluster with all new fall 2019 features :
+This is a set of Terraform files used to deploy an Azure Kubernetes Cluster with all new winter 2019/2020 features :
 
 - Nodes will be dispatched in different Availability Zones (AZ)
 - Node pools will support Autoscaling
@@ -19,12 +21,14 @@ These Terraform files can be used to deploy the following Azure components :
 
 On Kubernetes, these Terraform files will :
 - Create a ClusterRole Binding to give cluster-admin permissions to Kubernetes-Dashboard
+- Deploy Grafana using Bitnami Helm Chart (from Bitnami repo and also from AzureMarketplace repo)
 
 __Prerequisites :__
 - An Azure Subscription with enough privileges (create RG, AKS...)
 - Azure CLI 2.1.0 : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
    And you need to activate features that are still in preview : https://github.com/squasta/AzureKubernetesService-Labs/blob/master/0-PrepareAzure.txt
 - Terraform CLI 0.12.20 or > : https://www.terraform.io/downloads.html
+- Helm CLI 3.1.1 or > : https://helm.sh/docs/intro/install/ 
 
 __To deploy this infrastructure :__
 1. Log to your Azure subscription (az login)
