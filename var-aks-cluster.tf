@@ -72,8 +72,8 @@ variable "defaultpool-nodecount" {
 variable "defaultpool-vmsize" {
   description = "Size of VM"
   # check if the choosen size is available in Azure region you selected : az vm list-usage --location NAMEOFAZUREREGION -o table
-  type        = string
-  default     = "Standard_B2s"
+  type    = string
+  default = "Standard_B2s"
 }
 
 variable "defaultpool-ostype" {
@@ -133,8 +133,8 @@ variable "defaultpool-nodetaints" {
 }
 
 variable "defaultpool-securitypolicy" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 variable "windowspool-name" {

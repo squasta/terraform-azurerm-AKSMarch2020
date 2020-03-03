@@ -4,7 +4,7 @@ data "azurerm_key_vault" "terraform_vault" {
 }
 
 data "azurerm_key_vault_secret" "ssh_public_key" {
-  name         = "ClePubliqueSSH"    # must looks like "ssh-rsa AAAABxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx email@domaine.name"
+  name         = "ClePubliqueSSH" # must looks like "ssh-rsa AAAABxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx email@domaine.name"
   key_vault_id = data.azurerm_key_vault.terraform_vault.id
 }
 
@@ -19,5 +19,10 @@ data "azurerm_key_vault_secret" "spn_secret" {
 
 data "azurerm_key_vault_secret" "windows_admin_password" {
   name         = "windows-admin-password"
+  key_vault_id = data.azurerm_key_vault.terraform_vault.id
+}
+
+data "azurerm_key_vault_secret" "grafana_admin_password" {
+  name         = "grafana-admin-password"
   key_vault_id = data.azurerm_key_vault.terraform_vault.id
 }

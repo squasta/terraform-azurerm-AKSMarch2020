@@ -19,7 +19,7 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
     enable_auto_scaling = var.defaultpool-enableautoscaling
     min_count           = var.defaultpool-mincount
     max_count           = var.defaultpool-maxcount
-    node_taints         = var.defaultpool-nodetaints
+    # node_taints         = var.defaultpool-nodetaints
   }
 
   # dynamic "agent_pool_profile" {
