@@ -1,7 +1,7 @@
 # Azure Kubernetes Service Cluster deployment with Terraform
 
 
-= Tested with success with Terraform v0.12.12 + Azurerm provider version v1.35.0 + Kubernetes provider v1.9.0
+= Tested with success with Terraform v0.12.20 + Azurerm provider version v1.44.0 + Kubernetes provider v1.11.0 + Helm Provider 1.0.0
 
 --------------------------------------------------------------------------------------------------------
 
@@ -9,24 +9,22 @@ This is a set of Terraform files used to deploy an Azure Kubernetes Cluster with
 
 - Nodes will be dispatched in different Availability Zones (AZ)
 - Node pools will support Autoscaling
-- Different node pools :  Linux Nodes & Windows Nodes
 
 These Terraform files can be used to deploy the following Azure components :
 - An Azure Resource Group
-- An Azure Kubernetes Services Cluster with 2 node pools : one Linux and one Windows
+- An Azure Kubernetes Services Cluster with 1 node pool running Linux 
 - An Azure Load Balancer Standard SKU
 - A Virtual Network with it Subnets
 - An Azure Log Analytics Workspace + Containers solutions
 
 On Kubernetes, these Terraform files will :
-- Create a Tiller service account and a ClusterRole Binding
 - Create a ClusterRole Binding to give cluster-admin permissions to Kubernetes-Dashboard
 
 __Prerequisites :__
 - An Azure Subscription with enough privileges (create RG, AKS...)
-- Azure CLI 2.0.75 : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+- Azure CLI 2.1.0 : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
    And you need to activate features that are still in preview : https://github.com/squasta/AzureKubernetesService-Labs/blob/master/0-PrepareAzure.txt
-- Terraform CLI 0.12.12 or > : https://www.terraform.io/downloads.html
+- Terraform CLI 0.12.20 or > : https://www.terraform.io/downloads.html
 
 __To deploy this infrastructure :__
 1. Log to your Azure subscription (az login)
@@ -57,6 +55,3 @@ Connect to Kubernetes Dashboard :
 Then open a browser and go to http://127.0.0.1:8001
 
 ![Magic](https://github.com/squasta/AzureKubernetesService-Terraform/raw/master/Magic.gif)
-
-
-
