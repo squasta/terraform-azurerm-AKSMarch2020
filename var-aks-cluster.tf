@@ -51,7 +51,7 @@ variable "windows_admin_username" {
 variable "kubernetes_version" {
   description = "Version of Kubernetes to deploy"
   type        = string
-  default     = "1.14.6"
+  default     = "1.16.4"
 }
 
 
@@ -176,7 +176,7 @@ variable "windowspool-type" {
 variable "winpool-maxpods" {
   description = "number max of pods per node. can be between 30 to 250 on Advanced Network deployment"
   type        = number
-  default     = "100"
+  default     = "30" # cf. https://docs.microsoft.com/en-us/azure/aks/windows-node-limitations#can-i-change-the-max--of-pods-per-node
 }
 
 variable "winpool-availabilityzones" {

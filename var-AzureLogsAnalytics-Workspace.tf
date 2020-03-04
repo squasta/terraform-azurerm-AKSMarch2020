@@ -1,7 +1,7 @@
 
 # Variable to define the name of Log Analytics Workspace (used by Azure Monitor Logs)
 variable "LogsWorkspaceName" {
-  type = string
+  type    = string
   default = "AKS-LogsWorkspace"
 }
 

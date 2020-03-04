@@ -9,7 +9,7 @@
 # ----------------------------------------------------
 
 resource "azurerm_log_analytics_workspace" "Terra-LogsWorkspace" {
-  name                = var.LogsWorkspaceName
+  name                = "${var.LogsWorkspaceName}-${random_string.Terra-random.result}"
   location            = azurerm_resource_group.Terra_aks_rg.location
   resource_group_name = azurerm_resource_group.Terra_aks_rg.name
 
