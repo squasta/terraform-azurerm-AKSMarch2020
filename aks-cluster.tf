@@ -83,7 +83,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "Terra-AKS-NodePools" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.Terra_aks.id
   name                  = var.windowspool-name
   depends_on            = [azurerm_kubernetes_cluster.Terra_aks]
-  count                 = var.windowspool-nodecount     # static number or initial number of nodes. Must be between 1 to 100
+  node_count            = var.windowspool-nodecount     # static number or initial number of nodes. Must be between 1 to 100
   enable_auto_scaling   = var.winpool-enableautoscaling # use this parameter if you want an AKS Cluster with Node autoscale. Need also min_count and max_count
   min_count             = var.winpool-mincount          # minimum number of nodes with AKS Autoscaler
   max_count             = var.winpool-maxcount          # maximum number of nodes with AKS Autoscaler
