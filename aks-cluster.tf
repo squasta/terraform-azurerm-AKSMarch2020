@@ -23,26 +23,6 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
     # node_taints         = var.defaultpool-nodetaints
   }
 
-  # dynamic "agent_pool_profile" {
-  #   for_each = var.agent_pools
-  #   iterator = pool
-  #   content {
-  #     name            = pool.value.name
-  #     # count           = pool.value.count            # use this parameter if you want a static number of nodes. Must be between 1 to 100
-  #     enable_auto_scaling = true                      # use this parameter if you want an AKS Cluster with Node autoscale. Need also min_count and max_count
-  #     min_count           = pool.value.min_count      # minimum number of nodes with AKS Autoscaler
-  #     max_count           = pool.value.max_count      # maximum number of nodes with AKS Autoscaler
-  #     vm_size         = pool.value.vm_size
-  #     availability_zones = pool.value.availability_zones  # example : [1, 2, 3]
-  #     os_type         = pool.value.os_type  # example :linux, windows
-  #     os_disk_size_gb = pool.value.os_disk_size_gb
-  #     type            = pool.value.type
-  #     max_pods        = pool.value.max_pods   # between 30 and 100
-  #     vnet_subnet_id  = azurerm_subnet.Terra_aks_subnet.id
-  #     node_taints     = pool.value.node_taints        # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-  #   }
-  # }
-
   linux_profile {
     admin_username = var.admin_username
     ssh_key {
@@ -98,22 +78,21 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
 # }
 
 
-# # AKS Agent node-pool cf. https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster_node_pool.html
-# resource "azurerm_kubernetes_cluster_node_pool" "Terra-AKS-NodePools" {
-#   kubernetes_cluster_id = azurerm_kubernetes_cluster.Terra_aks.id
-#   name                  = var.windowspool-name
-#   depends_on = [azurerm_kubernetes_cluster.Terra_aks]
-#   count                 = var.windowspool-nodecount     # static number or initial number of nodes. Must be between 1 to 100
-#   enable_auto_scaling   = var.winpool-enableautoscaling # use this parameter if you want an AKS Cluster with Node autoscale. Need also min_count and max_count
-#   min_count             = var.winpool-mincount          # minimum number of nodes with AKS Autoscaler
-#   max_count             = var.winpool-maxcount          # maximum number of nodes with AKS Autoscaler
-#   vm_size               = var.windowspool-vmsize
-#   availability_zones    = var.winpool-availabilityzones # example : [1, 2, 3]
-#   os_type               = var.windowspool-ostype        # example :linux, windows
-#   os_disk_size_gb       = var.windowspool-osdisksizegb
-#   #type                  = pool.value.type
-#   max_pods       = var.winpool-maxpods # between 30 and 250
-#   vnet_subnet_id = azurerm_subnet.Terra_aks_subnet.id
-#   node_taints    = var.winpool-nodetaints # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-# }
+# AKS Agent node-pool cf. https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster_node_pool.html
+resource "azurerm_kubernetes_cluster_node_pool" "Terra-AKS-NodePools" {
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.Terra_aks.id
+  name                  = var.windowspool-name
+  depends_on            = [azurerm_kubernetes_cluster.Terra_aks]
+  count                 = var.windowspool-nodecount     # static number or initial number of nodes. Must be between 1 to 100
+  enable_auto_scaling   = var.winpool-enableautoscaling # use this parameter if you want an AKS Cluster with Node autoscale. Need also min_count and max_count
+  min_count             = var.winpool-mincount          # minimum number of nodes with AKS Autoscaler
+  max_count             = var.winpool-maxcount          # maximum number of nodes with AKS Autoscaler
+  vm_size               = var.windowspool-vmsize
+  availability_zones    = var.winpool-availabilityzones # example : [1, 2, 3]
+  os_type               = var.windowspool-ostype        # example :linux, windows
+  os_disk_size_gb       = var.windowspool-osdisksizegb
+  max_pods              = var.winpool-maxpods # between 30 and 250
+  vnet_subnet_id        = azurerm_subnet.Terra_aks_subnet.id
+  node_taints           = var.winpool-nodetaints # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+}
 

@@ -11,6 +11,8 @@ This is a set of Terraform files used to deploy an Azure Kubernetes Cluster with
 
 - Nodes will be dispatched in different Availability Zones (AZ)
 - Node pools will support Autoscaling
+- pool1 is a linux node pool (it is mandatory because of kube system pods)
+- pool2 is a windows server node pool with a taint
 
 These Terraform files can be used to deploy the following Azure components :
 - An Azure Resource Group
@@ -38,12 +40,14 @@ __To deploy this infrastructure :__
 5. Plan your terraform deployment : `terraform plan --var-file=myconf.tfvars`
 6. Apply your terraform deployment : `terraform apply --var-file=myconf.tfvars`
 
-__For more information about Terraform & Azure, few additional online resources :__
+__For more information about Terraform & Azure, Kubernetes few additional online resources :__
 - My blog : https://stanislas.io
 - Julien's blog : https://blog.jcorioland.io/
 - Terraform documentation : https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html
 - Azure Terraform Provider : https://github.com/terraform-providers/terraform-provider-azurerm
 - Azure Terraform Provider AKS Cluster : https://github.com/terraform-providers/terraform-provider-azurerm/blob/master/azurerm/resource_arm_kubernetes_cluster.go
+- Guide for scheduling Windows containers in Kubernetes
+ https://kubernetes.io/docs/setup/production-environment/windows/user-guide-windows-containers/
 
 After deployment is succeeded, you can check your cluster using portal or better with azure cli and the following command: 
 `az aks show --resource-group NAMEOFYOURRESOURCEGROUP --name NAMEOFYOURAKSCLUSTER -o jsonc`

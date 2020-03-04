@@ -146,13 +146,13 @@ variable "windowspool-name" {
 variable "windowspool-nodecount" {
   description = "Number of node in a static AKS cluster or initial number if autoscaling. between 1 to 100"
   type        = number
-  default     = "1"
+  default     = "2"
 }
 
 variable "windowspool-vmsize" {
   description = "Number of node in a static AKS cluster or initial number if autoscaling. between 1 to 100"
   type        = string
-  default     = "Standard_B2s"
+  default     = "Standard_D2s_v3"
 }
 
 variable "windowspool-ostype" {
@@ -207,58 +207,9 @@ variable "winpool-maxcount" {
 variable "winpool-nodetaints" {
   description = "A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)"
   # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  # https://kubernetes.io/docs/setup/production-environment/windows/user-guide-windows-containers/
   type    = list(string)
-  default = ["key=value:NoSchedule"]
+  default = ["os=windows:NoSchedule"]
 }
 
 
-# #AKS Agent pools
-# # Minimum is 1 Linux pool
-# # If you need Windows Nodes, add at least a second node pool
-# variable "agent_pools" {
-#   description = "List of agent_pools profile for multiple node pools Kubernetes Cluster"
-#   type = list(object({
-#     name                = string
-#     # count               = number       # number of node in a static AKS cluster. between 1 to 100
-#     vm_size             = string        # check available size in the target region : az vm list-sizes --location nameofAzureRegion 
-#     os_type             = string        # can be Linux or Windows
-#     os_disk_size_gb     = number        # default value is 30 GB as I remember
-#     type                = string        # Possible values are AvailabilitySet and VirtualMachineScaleSets. Default value is AvailabilitySet   
-#     max_pods            = number        # can be between 30 to 100 on Advanced Network deployment
-#     availability_zones  = list(number)  # example : [1, 2, 3]
-#     enable_auto_scaling = bool          # true or false
-#     min_count           = number        # min is 1 to 99
-#     max_count           = number        # max is between 2 and 100
-#     node_taints         = list(string)  # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-#   }))
-#   default = [
-#     {
-#       name            = "pool1"
-#       # count           = 3              # use this parameter if you want a static number of AKS nodes  min value is 1 max value is 100
-#       vm_size         = "Standard_D2_v2"
-#       os_type         = "Linux"
-#       os_disk_size_gb = "30"
-#       type            = "VirtualMachineScaleSets"
-#       max_pods        = 100
-#       availability_zones = [1, 2, 3]
-#       enable_auto_scaling = true   # use this parameter if you want an AKS Cluster with Nodes autoscaling. Need also min_count and max_count parameters
-#       min_count           = 1      # minimum number of nodes with AKS Autoscaler
-#       max_count           = 4      # maximum number of nodes with AKS Autoscaler
-#       node_taints         = ["key=value:PreferNoSchedule"]  # A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)
-#     }, 
-#     {
-#       name            = "pool2"
-#       # count           = 3              # use this parameter if you want a static number of AKS nodes  min value is 1 max value is 100
-#       vm_size         = "Standard_D2_v2"
-#       os_type         = "Windows"
-#       os_disk_size_gb = "30"
-#       type            = "VirtualMachineScaleSets"
-#       max_pods        = 30
-#       availability_zones = [1, 2, 3]
-#       enable_auto_scaling = true   # use this parameter if you want an AKS Cluster with Nodes autoscaling. Need also min_count and max_count parameters
-#       min_count           = 1      # minimum number of nodes with AKS Autoscaler
-#       max_count           = 4      # maximum number of nodes with AKS Autoscaler
-#       node_taints         = ["key=value:NoSchedule"]  # A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)
-#     }
-#   ]
-# }
