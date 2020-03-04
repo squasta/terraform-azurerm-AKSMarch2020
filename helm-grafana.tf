@@ -79,6 +79,11 @@ resource "helm_release" "Terra-grafana2" {
     value = "LoadBalancer"
   }
 
+  set {
+    name  = "tolerations"
+    value = "os=linux:NoSchedule"
+  }
+
 }
 
 
