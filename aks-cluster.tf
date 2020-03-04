@@ -8,6 +8,7 @@ resource "azurerm_kubernetes_cluster" "Terra_aks" {
   dns_prefix                 = var.dns_name
   kubernetes_version         = var.kubernetes_version
   enable_pod_security_policy = var.defaultpool-securitypolicy
+  depends_on                 = [azurerm_log_analytics_workspace.Terra-LogsWorkspace]
 
   default_node_pool {
     name                = var.defaultpool-name
