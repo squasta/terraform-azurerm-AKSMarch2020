@@ -93,6 +93,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "Terra-AKS-NodePools" {
   os_disk_size_gb       = var.windowspool-osdisksizegb
   max_pods              = var.winpool-maxpods # between 30 and 250
   vnet_subnet_id        = azurerm_subnet.Terra_aks_subnet.id
-  node_taints           = var.winpool-nodetaints # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  # node_taints           = var.winpool-nodetaints # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 }
 
