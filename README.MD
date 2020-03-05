@@ -3,7 +3,7 @@
 
 === Still work in progress ===
 
-= Tested with success with Terraform v0.12.20 + Azurerm provider version v1.44.0 + Kubernetes provider v1.11.0 + Helm Provider 1.0.0
+= Tested with success with Terraform v0.12.20 + Azurerm provider version v1.44.0 + Kubernetes provider v1.11.0 + Helm Provider 1.0.0 + random Provider 2.2
 
 --------------------------------------------------------------------------------------------------------
 
@@ -12,25 +12,26 @@ This is a set of Terraform files used to deploy an Azure Kubernetes Cluster with
 - Nodes will be dispatched in different Availability Zones (AZ)
 - Node pools will support Autoscaling
 - pool1 is a linux node pool (it is mandatory because of kube system pods)
-- pool2 is a windows server node pool with a taint
+- pool2 is a windows server 2019 node pool with a taint
 
 These Terraform files can be used to deploy the following Azure components :
 - An Azure Resource Group
 - An Azure Kubernetes Services Cluster with 1 node pool running Linux 
+- An additionnal node pool (pool2) with Windows Server 2019 nodes
 - An Azure Load Balancer Standard SKU
-- A Virtual Network with it Subnets
+- A Virtual Network with it Subnets (subnet for AKS Pods, subnets for AzureBastion and AzureFirewall/NVA if needed)
 - An Azure Log Analytics Workspace + Containers solutions
 
 On Kubernetes, these Terraform files will :
-- Create a ClusterRole Binding to give cluster-admin permissions to Kubernetes-Dashboard
-- Deploy Grafana using Bitnami Helm Chart (from Bitnami repo and also from AzureMarketplace repo)
+- Create a ClusterRole Binding to give cluster-admin permissions to Kubernetes-Dashboard (usefull if Kubernetes version <1.16)
+- Deploy Grafana using Bitnami Helm Chart (from Bitnami repo or from AzureMarketplace repo that is my default choice)
 
 __Prerequisites :__
 - An Azure Subscription with enough privileges (create RG, AKS...)
 - Azure CLI 2.1.0 : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
    And you need to activate features that are still in preview : https://github.com/squasta/AzureKubernetesService-Labs/blob/master/0-PrepareAzure.txt
 - Terraform CLI 0.12.20 or > : https://www.terraform.io/downloads.html
-- Helm CLI 3.1.1 or > : https://helm.sh/docs/intro/install/ 
+- Helm CLI 3.1.1 or > : https://helm.sh/docs/intro/install/ if you need to test Helm charts
 
 __To deploy this infrastructure :__
 1. Log to your Azure subscription (az login)

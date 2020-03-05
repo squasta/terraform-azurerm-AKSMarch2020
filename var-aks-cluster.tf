@@ -125,13 +125,6 @@ variable "defaultpool-maxcount" {
   default     = "3"
 }
 
-variable "defaultpool-nodetaints" {
-  description = "A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)"
-  # cf. https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-  type    = list(string)
-  default = ["key=value:PreferNoSchedule"]
-}
-
 variable "defaultpool-securitypolicy" {
   type    = bool
   default = false
